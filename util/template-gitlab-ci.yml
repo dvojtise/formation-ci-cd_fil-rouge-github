@@ -39,15 +39,15 @@ job_static_analysis_and_compilation:
 #########################################################################################################
 # cf. https://gitlab.com/help/ci/yaml/README.md#pages
 
-pages:
-  stage: ???
-  script:
-    - echo "Updated website on $(date)"
-  artifacts:
-    paths:
-      - ???
-  only:
-    - master
+# pages:
+#   stage: ???
+#   script:
+#     - echo "Updated website on $(date)"
+#   artifacts:
+#     paths:
+#       - ???
+#   only:
+#     - master
 
 
 
