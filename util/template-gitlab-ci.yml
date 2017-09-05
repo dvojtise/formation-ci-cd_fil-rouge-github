@@ -26,10 +26,10 @@ job_static_analysis_and_compilation:
     - ???
     - ??? renseigner ici les etapes pour la compilation
     - ???
-  artifacts:
-    paths:
-      - ???
-    expire_in: 1 week
+  # artifacts:
+  #   paths:
+  #     - ???
+  #   expire_in: 1 week
 
 
 #########################################################################################################
