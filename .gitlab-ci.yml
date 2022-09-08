@@ -1,6 +1,6 @@
 # cf. /etc/alpine-release
 # Alpine 3.6 needed to have the cppcheck package
-image: alpine:3.6
+image: alpine:3.16.2 
 
 before_script:
 - cp util/apk_repositories /etc/apk/repositories
@@ -111,12 +111,15 @@ job_coverage:
   - ls -atlrsh
   - genhtml --no-branch-coverage --output-directory lcov/ .coverage.total --highlight --frames --legend --title "Coverage test"
   - rm -f .coverage.base .coverage.run .coverage.total
-  #- tree lcov
-  - cat lcov/builds/chdeltel/tpmaster/src/index.html | grep headerCovTableEntryHi | head -1 || echo OK
+  - tree lcov
+  # FIXME: Tthe original line was the following
+  # - cat lcov/builds/chdeltel/tpmaster/src/index.html | grep headerCovTableEntryHi | head -1 || echo OK
+  - cat lcov/builds/*/src/index.html | grep headerCovTableEntryHi | head -1 || echo OK
               # the 1rst line gives the Lines coverage (the 2 line would give the Functions coverage)
               # warning : sometimes, without apparent reason, this job fails with
               #           Job failed: exit code 141
               # maybe due to head? https://stackoverflow.com/questions/19120263/why-exit-code-141-with-grep-q
+  - mkdir -p ../public/reports
   - mv lcov/ ../public/reports/
   - echo "Done"
   coverage: '/^.*<td class="headerCovTableEntryHi">(\d+.\d+) %<\/td>$/'

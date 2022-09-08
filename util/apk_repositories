@@ -1,5 +1,6 @@
 http://dl-cdn.alpinelinux.org/alpine/v3.6/main
 http://dl-cdn.alpinelinux.org/alpine/v3.6/community
 # cf. https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
-@edge http://nl.alpinelinux.org/alpine/edge/main
-@testing http://nl.alpinelinux.org/alpine/edge/testing
+# @edge http://dl-cdn.alpinelinux.org/alpine/edge/main
+@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing
+
