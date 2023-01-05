@@ -16,15 +16,27 @@ jobs:
     - name: install dependencies
       run: |
         sudo apt-get install -f -y libcppunit-dev 
-#    - name: configure
-#      run: ./configure
+
     - name: make
       working-directory: ./src
       run: make -f Makefile_linux.mk
-    - name: simple run
+      
+    - name: unit test
       working-directory: ./src
       run: ./testbasicmath
       
+    - name: Archive production artefacts  
+      uses: actions/upload-artifact@v3
+      with:
+          name: testbasicmath
+          path: src/testbasicmath
+  
+    - name: Archive unit test results  
+      uses: actions/upload-artifact@v3
+      with:
+          name: unit-test-result
+          path: src/cppTestBasicMathResults.xml
+          
 #    - name: make check
 #      run: make check
 #    - name: make distcheck
