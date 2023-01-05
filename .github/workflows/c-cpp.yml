@@ -7,41 +7,32 @@ on:
     branches: [ "main" ]
 
 jobs:
+  # each jobs (ie. build, test) run on separate VMs
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: install dependencies
       run: |
         sudo apt-get install -f -y libcppunit-dev 
-
     - name: make
       working-directory: ./src
       run: make -f Makefile_linux.mk
-      
-#    - name: unit test
-#      working-directory: ./src
-#      run: ./testbasicmath
-      
+
     - name: Archive production artefacts  
       uses: actions/upload-artifact@v3
       with:
           name: testbasicmath-bin
           path: src/testbasicmath
-  
-#    - name: Archive unit test results  
-#      uses: actions/upload-artifact@v3
-#      with:
-#          name: unit-test-result
-#          path: src/cppTestBasicMathResults.xml
 
   test:
     needs: build
     runs-on: ubuntu-latest
     steps:       
       # don't use checkout -> the workspace will be empty - uses: actions/checkout@v3  
+      - name: install dependencies
+        run: |
+          sudo apt-get install -f -y libcppunit-dev 
       - name: Download testbasicmath-bin
         uses: actions/download-artifact@v3
         with:
