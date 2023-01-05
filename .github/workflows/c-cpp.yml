@@ -40,13 +40,20 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
-    steps:          
+    steps:       
+      # don't use checkout -> the workspace will be empty - uses: actions/checkout@v3  
       - name: Download testbasicmath-bin
         uses: actions/download-artifact@v3
         with:
           name: testbasicmath-bin
-      - name: Print the final result
+          # downloaded file is placed at the root of the workspace by default
+      - name: run test
         shell: bash
         run: |
           ls
-          ls src
+          ./testbasicmath
+      - name: Archive unit test results  
+        uses: actions/upload-artifact@v3
+        with:
+          name: unit-test-result
+          path: cppTestBasicMathResults.xml
