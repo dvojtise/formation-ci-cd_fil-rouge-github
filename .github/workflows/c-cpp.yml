@@ -50,7 +50,8 @@ jobs:
       - name: run test
         shell: bash
         run: |
-          ls
+          ls -lsa
+          chmod a+x testbasicmath
           ./testbasicmath
       - name: Archive unit test results  
         uses: actions/upload-artifact@v3
