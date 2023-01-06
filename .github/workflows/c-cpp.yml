@@ -8,7 +8,7 @@ on:
 
 jobs:
   # each jobs (ie. build, test) run on separate VMs
-  build:
+  build-linux:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -22,11 +22,11 @@ jobs:
     - name: Archive production artefacts  
       uses: actions/upload-artifact@v3
       with:
-          name: testbasicmath-bin
+          name: testbasicmath-linux-bin
           path: src/testbasicmath
 
-  test:
-    needs: build
+  test-linux:
+    needs: build-linux
     runs-on: ubuntu-latest
     steps:       
       # don't use checkout -> the workspace will be empty - uses: actions/checkout@v3  
@@ -36,8 +36,8 @@ jobs:
       - name: Download testbasicmath-bin
         uses: actions/download-artifact@v3
         with:
-          name: testbasicmath-bin
-          # downloaded file is placed at the root of the workspace by default
+          name: testbasicmath-linux-bin
+          # downloaded artefact content is placed at the root of the workspace by default
       - name: run test
         shell: bash
         run: |
