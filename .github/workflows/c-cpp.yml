@@ -49,10 +49,10 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2.3.0
         if: always()  # always run even if the previous step fails
         with:
-          junit_files: "*Results.xml"
-          nunit_files: "*Results.xml" # don't know wich one works ...
-          xunit_files: "*Results.xml"
-          trx_files: "*Results.xml"
+          # junit_files: "*Results.xml"
+          nunit_files: "*Results.xml" 
+          # xunit_files: "*Results.xml"
+          # trx_files: "*Results.xml"
       - name: Archive unit test results  
         uses: actions/upload-artifact@v3
         if: always()  # always run even if the previous step fails
